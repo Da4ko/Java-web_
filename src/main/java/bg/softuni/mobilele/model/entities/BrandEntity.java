@@ -21,8 +21,8 @@ public class BrandEntity extends BaseEntity{
         return "BrandEntity{" +
                 "name='" + name + '\'' +
                 ", id=" + id +
-                ", created= " + created +
-                ", updated= " + updated +
+                ", created=" + created +
+                ", updated=" + updated +
                 '}';
     }
 }
