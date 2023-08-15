@@ -7,12 +7,21 @@ import java.util.List;
 @Table(name = "users")
 public class UserEntity extends BaseEntity{
     private String username;
+    private String password;
     private String firstName;
     private String lastName;
     private boolean isActive;
     private String imageUrl;
     @ManyToMany
     private List<UserRoleEntity> userRoles;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getUsername() {
         return username;
@@ -66,14 +75,12 @@ public class UserEntity extends BaseEntity{
     public String toString() {
         return "UserEntity{" +
                 "username='" + username + '\'' +
+                ", password='N/A" + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", isActive=" + isActive +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", userRoles=" + userRoles +
-                ", id=" + id +
-                ", created=" + created +
-                ", updated=" + updated +
                 '}';
     }
 }
