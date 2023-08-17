@@ -5,12 +5,13 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "user roles")
 public class UserRoleEntity  {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
     @Enumerated(EnumType.STRING)
-    private UserRoleEnum userRole;
+    private UserRoleEnum role;
 
     public Long getId() {
         return id;
@@ -20,19 +21,20 @@ public class UserRoleEntity  {
         this.id = id;
     }
 
-    public UserRoleEnum getUserRole() {
-        return userRole;
+    public UserRoleEnum getRole() {
+        return role;
     }
 
-    public void setUserRole(UserRoleEnum userRole) {
-        this.userRole = userRole;
+    public UserRoleEntity setRole(UserRoleEnum role) {
+        this.role = role;
+        return this;
     }
 
     @Override
     public String toString() {
         return "UserRoleEntity{" +
                 "id=" + id +
-                ", userRole=" + userRole +
+                ", userRole=" + role +
                 '}';
     }
 }

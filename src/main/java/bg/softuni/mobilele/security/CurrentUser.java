@@ -6,9 +6,10 @@ import org.springframework.web.context.annotation.SessionScope;
 @Component
 @SessionScope
 public class CurrentUser {
-    private static final String ANONYMOUS = "anonymous";
+    private static final String ANONYMOUS_NAME = "anonymous";
 
-    private String name = ANONYMOUS;
+    private String name = ANONYMOUS_NAME;
+
     private boolean isAnonymous = true;
 
 
@@ -31,7 +32,7 @@ public class CurrentUser {
 
     public void setAnonymous(boolean anonymous) {
         if(anonymous){
-            this.name = ANONYMOUS;
+            this.name = ANONYMOUS_NAME;
         }
         isAnonymous = anonymous;
     }

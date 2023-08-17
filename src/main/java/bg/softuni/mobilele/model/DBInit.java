@@ -4,10 +4,8 @@ import bg.softuni.mobilele.model.entities.*;
 import bg.softuni.mobilele.model.entities.enums.EngineEnum;
 import bg.softuni.mobilele.model.entities.enums.ModelCategoryEnum;
 import bg.softuni.mobilele.model.entities.enums.TransmissionEnum;
-import bg.softuni.mobilele.repository.BrandRepository;
-import bg.softuni.mobilele.repository.ModelRepository;
-import bg.softuni.mobilele.repository.OfferRepository;
-import bg.softuni.mobilele.repository.UserRepository;
+import bg.softuni.mobilele.model.entities.enums.UserRoleEnum;
+import bg.softuni.mobilele.repository.*;
 import jakarta.transaction.Transactional;
 import org.apache.catalina.User;
 import org.springframework.boot.CommandLineRunner;
@@ -26,17 +24,20 @@ public class DBInit implements CommandLineRunner {
     private final OfferRepository offerRepository;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final UserRoleRepository userRoleRepository;
 
     public DBInit(ModelRepository modelRepository,
                   BrandRepository brandRepository,
                   OfferRepository offerRepository,
                   UserRepository userRepository,
-                  PasswordEncoder passwordEncoder) {
+                  PasswordEncoder passwordEncoder,
+                  UserRoleRepository userRoleRepository) {
         this.modelRepository = modelRepository;
         this.brandRepository = brandRepository;
         this.offerRepository = offerRepository;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.userRoleRepository = userRoleRepository;
     }
 
     @Transactional
@@ -61,18 +62,37 @@ public class DBInit implements CommandLineRunner {
         initNC750S(hondaBrand);
         createFiestaOffer(fiestaModel);
 
-        initAdmin();
+        initUsers();
     }
-    private void initAdmin(){
+    private void initUsers(){
+
+        UserRoleEntity adminRole = new UserRoleEntity().setRole(UserRoleEnum.ADMIN); // it could break because of the different setters
+        UserRoleEntity userRole = new UserRoleEntity().setRole(UserRoleEnum.USER);
+
+        userRoleRepository.saveAll(List.of(adminRole, userRole));
+
         UserEntity admin = new UserEntity();
-        admin.setFirstName("Petyr");
+        admin.setFirstName("Kiril");
         admin.setLastName("Dimitrov");
         admin.setUsername("admin");
         admin.setPassword(passwordEncoder.encode("topsecret"));
+        admin.setUserRoles(List.of(adminRole, userRole));
         setCurrentTimestamps(admin);
-        userRepository.save(admin);
+
+
+
+        UserEntity pesho = new UserEntity();
+        pesho.setFirstName("Petyr");
+        pesho.setLastName("Ivanov");
+        pesho.setUsername("pesho");
+        pesho.setPassword(passwordEncoder.encode("topsecret"));
+        pesho.setUserRoles(List.of(userRole));
+        setCurrentTimestamps(pesho);
+
+        userRepository.saveAll(List.of(admin, pesho));
 
     }
+
 
     private ModelEntity initFiesta(BrandEntity fordBrand) {
         ModelEntity fiesta = new ModelEntity();
