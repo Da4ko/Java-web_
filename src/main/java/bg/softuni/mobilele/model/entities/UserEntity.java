@@ -12,7 +12,8 @@ public class UserEntity extends BaseEntity{
     private String lastName;
     private boolean isActive;
     private String imageUrl;
-    @ManyToMany
+
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<UserRoleEntity> userRoles;
 
     public String getPassword() {
