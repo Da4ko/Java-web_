@@ -46,13 +46,13 @@ public class DBInit implements CommandLineRunner {
 
         BrandEntity fordBrand = new BrandEntity();
         fordBrand.setName("Ford");
-        setCurrentTimestamps(fordBrand);
+     //   setCurrentTimestamps(fordBrand);
 
 
 
         BrandEntity hondaBrand = new BrandEntity();
         hondaBrand.setName("Honda");
-        setCurrentTimestamps(hondaBrand);
+     //   setCurrentTimestamps(hondaBrand);
 
 
         brandRepository.saveAll(List.of(fordBrand, hondaBrand));
@@ -77,7 +77,7 @@ public class DBInit implements CommandLineRunner {
         admin.setUsername("admin");
         admin.setPassword(passwordEncoder.encode("topsecret"));
         admin.setUserRoles(List.of(adminRole, userRole));
-        setCurrentTimestamps(admin);
+      //  setCurrentTimestamps(admin);
 
 
 
@@ -87,7 +87,7 @@ public class DBInit implements CommandLineRunner {
         pesho.setUsername("pesho");
         pesho.setPassword(passwordEncoder.encode("topsecret"));
         pesho.setUserRoles(List.of(userRole));
-        setCurrentTimestamps(pesho);
+      //  setCurrentTimestamps(pesho);
 
         userRepository.saveAll(List.of(admin, pesho));
 
@@ -102,7 +102,7 @@ public class DBInit implements CommandLineRunner {
         fiesta.setImageUrl("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwMtbRUS0Pa3Tf2FhkmINOPQsEr4x0_x_GdvxvHgMIUg&s");
         fiesta.setStartYear(1976);
         fiesta.setBrand(fordBrand);
-        setCurrentTimestamps(fiesta);
+      //  setCurrentTimestamps(fiesta);
 
         return modelRepository.save(fiesta);
     }
@@ -115,7 +115,7 @@ public class DBInit implements CommandLineRunner {
         escort.setStartYear(1968);
         escort.setEndYear(2002);
         escort.setBrand(fordBrand);
-        setCurrentTimestamps(escort);
+      //  setCurrentTimestamps(escort);
 
         return modelRepository.save(escort);
     }
@@ -130,7 +130,7 @@ public class DBInit implements CommandLineRunner {
         fiestaOffer.setDescription("Karana e ot nemska baba");
         fiestaOffer.setTransmissionEnum(TransmissionEnum.MANUAL);
         fiestaOffer.setModel(modelEntity);
-        setCurrentTimestamps(fiestaOffer);
+      //  setCurrentTimestamps(fiestaOffer);
         offerRepository.save(fiestaOffer);
     }
     private ModelEntity initNC750S(BrandEntity hondaBrand){
@@ -141,13 +141,13 @@ public class DBInit implements CommandLineRunner {
             nc750s.setImageUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/2012_Honda_NC700SA.jpg/300px-2012_Honda_NC700SA.jpg");
         nc750s.setStartYear(2014);
         nc750s.setBrand(hondaBrand);
-        setCurrentTimestamps(nc750s);
+       // setCurrentTimestamps(nc750s);
 
         return modelRepository.save(nc750s);
     }
 
-    private static void setCurrentTimestamps(BaseEntity baseEntity){
+   /* private static void setCurrentTimestamps(BaseEntity baseEntity){
         baseEntity.setCreated(Instant.now());
         baseEntity.setUpdated(Instant.now());
-    }
+    }*/
 }
