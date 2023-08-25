@@ -1,53 +1,32 @@
-package bg.softuni.mobilele.model.entities;
+package bg.softuni.mobilele.model.service;
 
 import bg.softuni.mobilele.model.entities.enums.EngineEnum;
 import bg.softuni.mobilele.model.entities.enums.TransmissionEnum;
-import jakarta.persistence.*;
+import bg.softuni.mobilele.model.validation.YearPastOrPresent;
+import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "offers")
-public class OfferEntity extends BaseEntity{
+public class OfferServiceModel {
 
-    @Enumerated(EnumType.STRING)
+    @NotNull
     private EngineEnum engine;
-
+    @NotNull
     private String imageUrl;
-
-    private String description;
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    private int mileage;
-
+    @NotNull
+    @Positive
+    private Integer mileage;
+    @DecimalMin("100")
     private BigDecimal price;
-
-    private int year;
-
-    @Enumerated(EnumType.STRING)
+    @YearPastOrPresent(minYear = 1930)
+    private Integer year;
+    @NotEmpty
+    @Size(min = 10, max = 512)
+    private String description;
+    @NotNull
     private TransmissionEnum transmissionEnum;
-
-    @ManyToOne
-    private ModelEntity model;
-
-    @ManyToOne
-    private UserEntity user;
-    public UserEntity getUser() {
-        return user;
-   }
-
-    public void setUser(UserEntity user) {
-        this.user = user;
-    }
-
-
+    @NotNull
+    private Integer modelId;
 
     public EngineEnum getEngine() {
         return engine;
@@ -65,11 +44,11 @@ public class OfferEntity extends BaseEntity{
         this.imageUrl = imageUrl;
     }
 
-    public int getMileage() {
+    public Integer getMileage() {
         return mileage;
     }
 
-    public void setMileage(int mileage) {
+    public void setMileage(Integer mileage) {
         this.mileage = mileage;
     }
 
@@ -81,12 +60,20 @@ public class OfferEntity extends BaseEntity{
         this.price = price;
     }
 
-    public int getYear() {
+    public Integer getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(Integer year) {
         this.year = year;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public TransmissionEnum getTransmissionEnum() {
@@ -97,28 +84,25 @@ public class OfferEntity extends BaseEntity{
         this.transmissionEnum = transmissionEnum;
     }
 
-    public ModelEntity getModel() {
-        return model;
+    public Integer getModelId() {
+        return modelId;
     }
 
-    public void setModel(ModelEntity model) {
-        this.model = model;
+    public void setModelId(Integer modelId) {
+        this.modelId = modelId;
     }
 
     @Override
     public String toString() {
-        return "OfferEntity{" +
+        return "OfferServiceModel{" +
                 "engine=" + engine +
                 ", imageUrl='" + imageUrl + '\'' +
-                ", description='" + description + '\'' +
                 ", mileage=" + mileage +
                 ", price=" + price +
                 ", year=" + year +
+                ", description='" + description + '\'' +
                 ", transmissionEnum=" + transmissionEnum +
-                ", model=" + model +
-                ", id=" + id +
-                ", created=" + created +
-                ", updated=" + updated +
+                ", modelId=" + modelId +
                 '}';
     }
 }

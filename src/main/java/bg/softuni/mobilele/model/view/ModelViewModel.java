@@ -3,6 +3,7 @@ package bg.softuni.mobilele.model.view;
 import bg.softuni.mobilele.model.entities.enums.ModelCategoryEnum;
 
 public class ModelViewModel {
+    private long id;
     private String name;
     private ModelCategoryEnum category;
     private String imageUrl;
@@ -50,10 +51,19 @@ public class ModelViewModel {
         this.endYear = endYear;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "ModelViewModel{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", category=" + category +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", startYear=" + startYear +

@@ -2,12 +2,17 @@ package bg.softuni.mobilele.web;
 
 import bg.softuni.mobilele.model.entities.enums.EngineEnum;
 import bg.softuni.mobilele.model.entities.enums.TransmissionEnum;
+import bg.softuni.mobilele.model.service.OfferServiceModel;
+import bg.softuni.mobilele.model.service.UserLoginServiceModel;
 import bg.softuni.mobilele.service.BrandService;
 import bg.softuni.mobilele.service.OfferService;
+import com.fasterxml.jackson.core.JsonToken;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -21,6 +26,10 @@ public class OffersController {
         this.offerService = offerService;
         this.brandService = brandService;
     }
+    @ModelAttribute("offerModel")
+    public OfferServiceModel offerModel(){
+        return new OfferServiceModel();
+    }
 
     @GetMapping("/add")
     public String addOffer(Model model){
@@ -30,9 +39,16 @@ public class OffersController {
         return "offer-add";
     }
 
+    @PostMapping("/add")
+    public String addOffer( @ModelAttribute OfferServiceModel offerModel){
+        System.out.println(offerModel);
+        return "redirect:/offers/all";
+    }
+
+
     @GetMapping("/all")
     public String getAllOffers(Model model){
-        model.addAttribute("models", offerService.getAllOffers());
+       // model.addAttribute("models", offerService.getAllOffers());
         return "offers";
     }
 
