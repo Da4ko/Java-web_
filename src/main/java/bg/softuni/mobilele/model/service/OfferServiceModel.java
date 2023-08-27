@@ -16,6 +16,7 @@ public class OfferServiceModel {
     @NotNull
     @Positive
     private Integer mileage;
+    @NotNull
     @DecimalMin("100")
     private BigDecimal price;
     @YearPastOrPresent(minYear = 1930)
@@ -26,7 +27,7 @@ public class OfferServiceModel {
     @NotNull
     private TransmissionEnum transmissionEnum;
     @NotNull
-    private Integer modelId;
+    private Long modelId;
 
     public EngineEnum getEngine() {
         return engine;
@@ -84,11 +85,11 @@ public class OfferServiceModel {
         this.transmissionEnum = transmissionEnum;
     }
 
-    public Integer getModelId() {
+    public Long getModelId() {
         return modelId;
     }
 
-    public void setModelId(Integer modelId) {
+    public void setModelId(Long modelId) {
         this.modelId = modelId;
     }
 

@@ -50,6 +50,11 @@ public class OfferServiceImpl implements OfferService {
     private OfferEntity asNewEntity(OfferServiceModel model){
         OfferEntity offerEntity = new OfferEntity();
         modelMapper.map(model, offerEntity);
+        offerEntity.setId(null);
+
+        offerEntity.setModel(modelRepository.findById(model.getModelId()).orElseThrow());
+        offerEntity.setUser(userRepository.findByUsername(currentUser.getName()).orElseThrow());
+
         return offerEntity;
     }
 }
