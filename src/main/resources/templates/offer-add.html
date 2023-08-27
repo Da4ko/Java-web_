@@ -105,15 +105,25 @@
         <div class="row">
             <div class="form-group col-md-6 mb-3">
                 <label for="year" class="text-white font-weight-bold">Year</label>
-                <input id="year" name="year" type="number" min="1900" max="2099" step="1" class="form-control"
+                <input id="year"
+                       name="year"
+                       th:value="*{year}"
+                       th:errorclass="is-invalid"
+                       type="number"
+                       class="form-control"
                        placeholder="Manufacturing year"/>
                 <p class="invalid-feedback">
-                    Manufacturing year is required.
+                    Reasonable Manufacturing year is required.
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
                 <label for="mileage" class="text-white font-weight-bold">Mileage</label>
-                <input id="mileage" name="mileage" type="number" min="0" max="900000" step="1000"
+                <input id="mileage"
+                       name="mileage"
+                       th:errorclass="is-invalid"
+                       th:value="*{mileage}"
+                       type="number"
+                       min="0" max="900000" step="1000"
                        class="form-control"
                        placeholder="Mileage in kilometers"/>
                 <p class="invalid-feedback">
@@ -124,15 +134,26 @@
 
         <div class="form-group">
             <label class="text-white font-weight-bold" for="description">Description</label>
-            <textarea id="description" name="description" type="textarea" class="form-control" rows="3"
+            <textarea
+                    id="description"
+                    name="description"
+                    th:errorclass="is-invalid"
+                    th:text="*{description}"
+                    type="textarea"
+                    class="form-control"
+                    rows="3"
                       placeholder="Description"></textarea>
             <p class="invalid-feedback">
-                Description is required.
+                Description is required(min 10 max 512 characters).
             </p>
         </div>
         <div class="form-group">
             <label class="text-white font-weight-bold" for="imageUrl">Image URL</label>
-            <input id="imageUrl" name="imageUrl" type="url" class="form-control"
+            <input id="imageUrl"
+                   name="imageUrl"
+                   th:errorclass="is-invalid"
+                   th:value="*{imageUrl}"
+                   type="url" class="form-control"
                    placeholder="Put vehicle image URL here">
             <p class="invalid-feedback">
                 Vehicle image URL is required.
